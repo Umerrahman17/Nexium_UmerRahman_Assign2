@@ -1,45 +1,69 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-const blogContentSchema = new mongoose.Schema({
+export interface IBlogContent extends Document {
+  originalUrl: string;
+  title: string;
+  content: string;
+  author?: string;
+  publishedDate?: Date;
+  scrapedAt: Date;
+  wordCount: number;
+  language: string;
+  tags?: string[];
+  summaryId?: string; // Reference to Supabase summary
+}
+
+const BlogContentSchema = new Schema<IBlogContent>({
   originalUrl: {
     type: String,
     required: true,
     unique: true,
+    index: true
   },
   title: {
     type: String,
     required: true,
+    index: true
   },
   content: {
     type: String,
-    required: true,
+    required: true
   },
   author: {
     type: String,
-    default: null,
+    default: null
   },
   publishedDate: {
     type: Date,
-    default: null,
+    default: null
+  },
+  scrapedAt: {
+    type: Date,
+    default: Date.now
   },
   wordCount: {
     type: Number,
-    default: 0,
+    required: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  language: {
+    type: String,
+    default: 'en'
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  tags: [{
+    type: String
+  }],
+  summaryId: {
+    type: String,
+    default: null
+  }
+}, {
+  timestamps: true
 });
 
-// Update the updatedAt field before saving
-blogContentSchema.pre('save', function(next) {
-  this.updatedAt = new Date();
-  next();
-});
+// Create indexes for better query performance
+BlogContentSchema.index({ originalUrl: 1 });
+BlogContentSchema.index({ title: 'text', content: 'text' });
+BlogContentSchema.index({ scrapedAt: -1 });
+BlogContentSchema.index({ summaryId: 1 });
 
-export default mongoose.models.BlogContent || mongoose.model('BlogContent', blogContentSchema); 
+export default mongoose.models.BlogContent || mongoose.model<IBlogContent>('BlogContent', BlogContentSchema); 

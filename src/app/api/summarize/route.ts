@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { scrapeBlog } from '@/lib/scraper';
 import { generateSummary } from '@/lib/summarizer';
 import { translateToUrdu } from '@/lib/urduDictionary';
+import DatabaseService from '@/lib/database';
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,49 +46,40 @@ export async function POST(request: NextRequest) {
     let summaryId = null;
     let databaseStatus = 'not_available';
 
-    // Try to save to MongoDB
     try {
-      const { default: connectDB } = await import('@/lib/mongodb');
-      const { default: BlogContent } = await import('@/lib/models/BlogContent');
-      
-      await connectDB();
-      const blogContent = new BlogContent({
+      // Prepare blog data
+      const blogData = {
         originalUrl: url,
         title: scrapedContent.title,
         content: scrapedContent.content,
         author: scrapedContent.author,
         publishedDate: scrapedContent.publishedDate,
         wordCount: scrapedContent.wordCount,
-      });
-      await blogContent.save();
-      mongoId = blogContent._id.toString();
-      databaseStatus = 'mongodb_only';
-    } catch (dbError) {
-      console.warn('MongoDB connection failed:', dbError);
-    }
+        language: 'en',
+        tags: []
+      };
 
-    // Try to save to PostgreSQL
-    try {
-      const { prisma } = await import('@/lib/prisma');
-      
-      const blogSummary = await prisma.blogSummary.create({
-        data: {
-          originalUrl: url,
-          title: scrapedContent.title,
-          summary: summary,
-          urduSummary: urduSummary,
-          mongoId: mongoId,
-        },
-      });
-      summaryId = blogSummary.id;
-      databaseStatus = mongoId ? 'both' : 'postgresql_only';
+      // Prepare summary data
+      const summaryData = {
+        originalUrl: url,
+        title: scrapedContent.title,
+        summary: summary,
+        urduSummary: urduSummary,
+        wordCount: summary.split(' ').length,
+        language: 'en',
+        tags: [],
+        author: scrapedContent.author,
+        publishedDate: scrapedContent.publishedDate
+      };
+
+      // Save to both databases
+      const result = await DatabaseService.saveBlogWithSummary(blogData, summaryData);
+      mongoId = result.mongoId;
+      summaryId = result.summaryId;
+      databaseStatus = 'both';
     } catch (dbError) {
-      console.warn('PostgreSQL connection failed:', dbError);
-      if (databaseStatus === 'mongodb_only') {
-        databaseStatus = 'mongodb_only';
-      } else {
-        databaseStatus = 'not_available';
-      }
+      console.warn('Database connection failed:', dbError);
+      databaseStatus = 'not_available';
     }
 
     return NextResponse.json({
