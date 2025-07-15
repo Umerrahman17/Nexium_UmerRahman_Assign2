@@ -53,9 +53,9 @@ Runs at: [http://localhost:3000](http://localhost:3000)
 /src/app/api/summarize/route.ts         → Main API logic for summarization
 /src/app/api/summaries/[id]/route.ts    → CRUD for summaries
 /src/app/api/summaries/search/route.ts  → Search summaries
-/src/lib/scraper.ts                     → Scraping logic (custom, no n8n)
+/src/lib/scraper.ts                     → Scraping logic
 /src/lib/summarizer.ts                  → Summarization logic
-/src/lib/urduDictionary.ts              → Urdu translation logic (if used)
+/src/lib/urduDictionary.ts              → Urdu translation logic
 /src/lib/prisma.ts                      → Prisma client
 /prisma/schema.prisma                   → Supabase DB schema
 /src/components/ui/                     → UI components
