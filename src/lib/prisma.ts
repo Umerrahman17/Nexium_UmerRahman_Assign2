@@ -5,11 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let prisma: PrismaClient;
+const prisma = new PrismaClient();
 
-export function getPrisma() {
-  if (!prisma) {
-    prisma = new PrismaClient();
-  }
-  return prisma;
-}
+export { prisma };

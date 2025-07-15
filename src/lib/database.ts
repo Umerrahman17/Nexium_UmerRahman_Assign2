@@ -1,9 +1,7 @@
 import { connectToMongo } from './mongodb';
 import BlogContent from './models/BlogContent';
 import { IBlogContent } from './models/BlogContent';
-import { getPrisma } from './prisma';
-const prisma = getPrisma();
-
+import { prisma } from './prisma';
 
 export interface BlogData {
   originalUrl: string;
@@ -32,7 +30,6 @@ export class DatabaseService {
   // MongoDB Operations
   static async saveBlogContent(data: BlogData): Promise<string> {
     await connectToMongo();
-    
     const blogContent = new BlogContent({
       originalUrl: data.originalUrl,
       title: data.title,
@@ -43,7 +40,7 @@ export class DatabaseService {
       language: data.language || 'en',
       tags: data.tags || []
     });
-    
+
     await blogContent.save();
     return blogContent._id.toString();
   }
@@ -55,13 +52,10 @@ export class DatabaseService {
 
   static async updateBlogContentWithSummaryId(url: string, summaryId: string): Promise<void> {
     await connectToMongo();
-    await BlogContent.updateOne(
-      { originalUrl: url },
-      { summaryId: summaryId }
-    );
+    await BlogContent.updateOne({ originalUrl: url }, { summaryId });
   }
 
-  // Supabase Operations (via Prisma)
+  // Supabase (PostgreSQL) Operations via Prisma
   static async saveSummary(data: SummaryData): Promise<string> {
     const summary = await prisma.blogSummary.create({
       data: {
@@ -76,7 +70,7 @@ export class DatabaseService {
         publishedDate: data.publishedDate
       }
     });
-    
+
     return summary.id;
   }
 
@@ -122,25 +116,11 @@ export class DatabaseService {
     });
   }
 
-
-
-  // Combined Operations
-  static async saveBlogWithSummary(blogData: BlogData, summaryData: SummaryData): Promise<{ mongoId: string; summaryId: string }> {
-    // Save to MongoDB first
+  // Combined Operation
+  static async saveBlogWithSummary(blogData: BlogData, summaryData: SummaryData) {
     const mongoId = await this.saveBlogContent(blogData);
-    
-    // Update summary data with MongoDB reference
-    const summaryWithMongoId = {
-      ...summaryData,
-      mongoId: mongoId
-    };
-    
-    // Save to Supabase
-    const summaryId = await this.saveSummary(summaryWithMongoId);
-    
-    // Update MongoDB with summary reference
+    const summaryId = await this.saveSummary(summaryData);
     await this.updateBlogContentWithSummaryId(blogData.originalUrl, summaryId);
-    
     return { mongoId, summaryId };
   }
 
@@ -149,9 +129,8 @@ export class DatabaseService {
       this.getBlogContent(url),
       this.getSummary(url)
     ]);
-    
     return { blogContent, summary };
   }
 }
 
-export default DatabaseService; 
+export default DatabaseService;
