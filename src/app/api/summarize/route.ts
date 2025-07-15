@@ -15,6 +15,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if blog already exists in DB
+    const existing = await DatabaseService.getBlogWithSummary(url);
+    if (existing.blogContent) {
+      return NextResponse.json({
+        title: existing.blogContent.title,
+        wordCount: existing.blogContent.wordCount,
+        author: existing.blogContent.author,
+        summary: existing.summary?.summary,
+        urduSummary: existing.summary?.urduSummary,
+        id: existing.summary?.id,
+        mongoId: existing.blogContent._id,
+        databaseStatus: 'already_exists',
+        savedToDatabase: true,
+        message: 'Blog already exists in the database.'
+      });
+    }
+
     // Validate URL
     let parsedUrl;
     try {
@@ -38,16 +55,24 @@ export async function POST(request: NextRequest) {
     // Generate AI summary
     const summary = generateSummary(scrapedContent.content);
 
-    // Translate to Urdu
-    const urduSummary = translateToUrdu(summary);
+    // Check if summary is an error message
+    let urduSummary = '';
+    if (summary.startsWith('ERROR:')) {
+      // Handle error messages specially
+      const errorMessage = summary.replace('ERROR: ', '');
+      urduSummary = translateToUrdu(errorMessage);
+    } else {
+      // Normal summary translation
+      urduSummary = translateToUrdu(summary);
+    }
 
-    // Try to save to databases (optional - won't fail if databases are not available)
-    let mongoId = null;
+    // Save to both databases
     let summaryId = null;
+    let mongoId = null;
     let databaseStatus = 'not_available';
 
     try {
-      // Prepare blog data
+      // Prepare data for both databases
       const blogData = {
         originalUrl: url,
         title: scrapedContent.title,
@@ -59,7 +84,6 @@ export async function POST(request: NextRequest) {
         tags: []
       };
 
-      // Prepare summary data
       const summaryData = {
         originalUrl: url,
         title: scrapedContent.title,
@@ -72,14 +96,27 @@ export async function POST(request: NextRequest) {
         publishedDate: scrapedContent.publishedDate
       };
 
-      // Save to both databases
-      const result = await DatabaseService.saveBlogWithSummary(blogData, summaryData);
-      mongoId = result.mongoId;
-      summaryId = result.summaryId;
-      databaseStatus = 'both';
+      // Try to save to both databases
+      try {
+        const result = await DatabaseService.saveBlogWithSummary(blogData, summaryData);
+        summaryId = result.summaryId;
+        mongoId = result.mongoId;
+        databaseStatus = 'both';
+        console.log('✅ Data saved to both databases - Summary ID:', summaryId, 'MongoDB ID:', mongoId);
+      } catch (combinedError) {
+        console.error('❌ Combined save failed, trying Supabase only:', combinedError);
+        // Fallback to Supabase only
+        try {
+          summaryId = await DatabaseService.saveSummary(summaryData);
+          databaseStatus = 'supabase';
+          console.log('✅ Summary saved to Supabase with ID:', summaryId);
+        } catch (supabaseError) {
+          console.error('❌ Supabase save failed:', supabaseError);
+          databaseStatus = 'not_available';
+        }
+      }
     } catch (dbError) {
-      console.warn('Database connection failed:', dbError);
-      databaseStatus = 'not_available';
+      console.error('❌ Database save failed:', dbError);
     }
 
     return NextResponse.json({
@@ -89,37 +126,32 @@ export async function POST(request: NextRequest) {
       summary: summary,
       urduSummary: urduSummary,
       id: summaryId,
+      mongoId: mongoId,
       databaseStatus: databaseStatus,
       savedToDatabase: databaseStatus !== 'not_available',
     });
 
   } catch (error) {
     console.error('Error processing blog:', error);
-    
-    // Provide more specific error messages
+    // Provide more specific error messages based on the error
     if (error instanceof Error) {
-      if (error.message.includes('ENOTFOUND')) {
+      const message = error.message.toLowerCase();
+      // Scraping errors
+      if (message.includes('page not found') || message.includes('404')) {
         return NextResponse.json(
-          { error: 'Could not reach the website. Please check the URL and try again.' },
+          { error: 'Page not found (404). Please check if the URL is correct and the page exists.' },
           { status: 400 }
         );
       }
-      if (error.message.includes('timeout')) {
+      if (message.includes('access forbidden') || message.includes('403')) {
         return NextResponse.json(
-          { error: 'Request timed out. The website might be slow or unavailable.' },
-          { status: 408 }
-        );
-      }
-      if (error.message.includes('ECONNREFUSED')) {
-        return NextResponse.json(
-          { error: 'Database connection failed, but summary was generated successfully.' },
-          { status: 200 }
+          { error: 'Access forbidden (403). This website may block automated requests.' },
+          { status: 400 }
         );
       }
     }
-    
     return NextResponse.json(
-      { error: 'Failed to process blog. Please try again with a different URL.' },
+      { error: 'Failed to process blog.' },
       { status: 500 }
     );
   }

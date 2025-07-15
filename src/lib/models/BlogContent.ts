@@ -61,7 +61,6 @@ const BlogContentSchema = new Schema<IBlogContent>({
 });
 
 // Create indexes for better query performance
-BlogContentSchema.index({ originalUrl: 1 });
 BlogContentSchema.index({ title: 'text', content: 'text' });
 BlogContentSchema.index({ scrapedAt: -1 });
 BlogContentSchema.index({ summaryId: 1 });

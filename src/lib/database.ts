@@ -1,10 +1,7 @@
-import { PrismaClient } from './generated/prisma';
-import connectDB from './mongodb';
+import { connectToMongo } from './mongodb';
 import BlogContent from './models/BlogContent';
 import { IBlogContent } from './models/BlogContent';
-
-// Initialize Prisma client
-const prisma = new PrismaClient();
+import { prisma } from './prisma';
 
 export interface BlogData {
   originalUrl: string;
@@ -27,13 +24,12 @@ export interface SummaryData {
   tags?: string[];
   author?: string;
   publishedDate?: Date;
-  userId?: string;
 }
 
 export class DatabaseService {
   // MongoDB Operations
   static async saveBlogContent(data: BlogData): Promise<string> {
-    await connectDB();
+    await connectToMongo();
     
     const blogContent = new BlogContent({
       originalUrl: data.originalUrl,
@@ -51,12 +47,12 @@ export class DatabaseService {
   }
 
   static async getBlogContent(url: string): Promise<IBlogContent | null> {
-    await connectDB();
+    await connectToMongo();
     return await BlogContent.findOne({ originalUrl: url });
   }
 
   static async updateBlogContentWithSummaryId(url: string, summaryId: string): Promise<void> {
-    await connectDB();
+    await connectToMongo();
     await BlogContent.updateOne(
       { originalUrl: url },
       { summaryId: summaryId }
@@ -75,8 +71,7 @@ export class DatabaseService {
         language: data.language || 'en',
         tags: data.tags || [],
         author: data.author,
-        publishedDate: data.publishedDate,
-        userId: data.userId
+        publishedDate: data.publishedDate
       }
     });
     
@@ -85,8 +80,13 @@ export class DatabaseService {
 
   static async getSummary(url: string) {
     return await prisma.blogSummary.findUnique({
-      where: { originalUrl: url },
-      include: { user: true }
+      where: { originalUrl: url }
+    });
+  }
+
+  static async getSummaryById(id: string) {
+    return await prisma.blogSummary.findUnique({
+      where: { id }
     });
   }
 
@@ -94,8 +94,7 @@ export class DatabaseService {
     return await prisma.blogSummary.findMany({
       take: limit,
       skip: offset,
-      orderBy: { createdAt: 'desc' },
-      include: { user: true }
+      orderBy: { createdAt: 'desc' }
     });
   }
 
@@ -121,19 +120,7 @@ export class DatabaseService {
     });
   }
 
-  // User Operations
-  static async createUser(email: string, name?: string) {
-    return await prisma.user.create({
-      data: { email, name }
-    });
-  }
 
-  static async getUserByEmail(email: string) {
-    return await prisma.user.findUnique({
-      where: { email },
-      include: { summaries: true }
-    });
-  }
 
   // Combined Operations
   static async saveBlogWithSummary(blogData: BlogData, summaryData: SummaryData): Promise<{ mongoId: string; summaryId: string }> {

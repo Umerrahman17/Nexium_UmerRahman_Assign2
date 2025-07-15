@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -33,22 +32,5 @@ model BlogSummary {
   author      String?
   publishedDate DateTime?
   
-  // User who created the summary (if applicable)
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  
   @@map("blog_summaries")
-}
-
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  // User's summaries
-  summaries BlogSummary[]
-  
-  @@map("users")
 }
