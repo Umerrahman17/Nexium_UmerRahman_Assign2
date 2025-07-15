@@ -14,7 +14,7 @@ export default function Home() {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!url) return;
 

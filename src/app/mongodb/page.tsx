@@ -45,6 +45,7 @@ export default function MongoDBViewer() {
         setError(result.error || 'Failed to fetch data');
       }
     } catch (err) {
+      console.error('Error loading data:', err);
       setError('Failed to connect to MongoDB');
     } finally {
       setLoading(false);
