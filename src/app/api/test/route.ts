@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { insertBlogContent } from "@/lib/mongodb";
 
 export async function GET() {
@@ -13,8 +14,8 @@ export async function GET() {
   };
   try {
     const result = await insertBlogContent(testData);
-    return Response.json({ inserted: result });
+    return NextResponse.json({ inserted: result });
   } catch (error) {
-    return Response.json({ error: error instanceof Error ? error.message : error });
+    return NextResponse.json({ error: error instanceof Error ? error.message : error });
   }
 } 

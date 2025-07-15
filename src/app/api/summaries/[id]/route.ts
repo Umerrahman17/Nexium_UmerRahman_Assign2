@@ -1,50 +1,67 @@
 import { NextRequest, NextResponse } from 'next/server';
-import DatabaseService from '@/lib/database';
+import { prisma } from '@/lib/prisma';
 
-export async function GET(req: NextRequest, context: any) {
-  const id = context.params?.id;
+// ✅ Correct type for context with params
+type Context = {
+  params: {
+    id: string;
+  };
+};
+
+// ✅ GET summary by ID
+export async function GET(_req: NextRequest, context: Context) {
+  const { id } = context.params;
 
   if (!id) {
     return new NextResponse('Missing ID', { status: 400 });
   }
 
   try {
-    const summary = await DatabaseService.getSummaryById(id);
+    const summary = await prisma.blogSummary.findUnique({
+      where: { id },
+    });
 
     if (!summary) {
       return new NextResponse('Not found', { status: 404 });
     }
 
     return NextResponse.json(summary);
-  } catch (err) {
-    console.error('❌ GET Error:', err);
+  } catch (error) {
+    console.error('GET /api/summaries/[id] error:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
 
-export async function PUT(req: NextRequest, context: any) {
-  const id = context.params?.id;
+// ✅ DELETE summary by ID
+export async function DELETE(_req: NextRequest, context: Context) {
+  const { id } = context.params;
 
   try {
-    const data = await req.json();
+    await prisma.blogSummary.delete({
+      where: { id },
+    });
 
-    const updatedSummary = await DatabaseService.updateSummary(id, data);
-
-    return NextResponse.json(updatedSummary);
-  } catch (err) {
-    console.error('❌ PUT Error:', err);
-    return new NextResponse('Failed to update summary', { status: 500 });
+    return NextResponse.json({ message: 'Deleted successfully' });
+  } catch (error) {
+    console.error('DELETE /api/summaries/[id] error:', error);
+    return new NextResponse('Failed to delete summary', { status: 500 });
   }
 }
 
-export async function DELETE(req: NextRequest, context: any) {
-  const id = context.params?.id;
+// ✅ PUT update summary by ID
+export async function PUT(req: NextRequest, context: Context) {
+  const { id } = context.params;
+  const body = await req.json();
 
   try {
-    await DatabaseService.deleteSummary(id);
-    return NextResponse.json({ message: 'Summary deleted successfully' });
-  } catch (err) {
-    console.error('❌ DELETE Error:', err);
-    return new NextResponse('Failed to delete summary', { status: 500 });
+    const updated = await prisma.blogSummary.update({
+      where: { id },
+      data: body,
+    });
+
+    return NextResponse.json(updated);
+  } catch (error) {
+    console.error('PUT /api/summaries/[id] error:', error);
+    return new NextResponse('Failed to update summary', { status: 500 });
   }
 }
