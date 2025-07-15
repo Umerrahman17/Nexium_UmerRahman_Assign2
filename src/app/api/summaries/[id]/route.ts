@@ -1,33 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import DatabaseService from '@/lib/database';
 
-export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
-    const { id } = await context.params;
-
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Summary ID is required' },
-        { status: 400 }
-      );
+    if (!params?.id) {
+      return new Response('Missing ID', { status: 400 });
     }
 
-    const summary = await DatabaseService.getSummaryById(id);
-    
+    const summary = await DatabaseService.getSummaryById(params.id);
+
     if (!summary) {
-      return NextResponse.json(
-        { error: 'Summary not found' },
-        { status: 404 }
-      );
+      return new Response('Not found', { status: 404 });
     }
 
-    return NextResponse.json(summary);
-  } catch (error) {
-    console.error('Error fetching summary:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch summary' },
-      { status: 500 }
-    );
+    return Response.json(summary);
+  } catch (err) {
+    console.error('❌ Error fetching summary by ID:', err);
+    return new Response('Internal Server Error', { status: 500 });
   }
 }
 
