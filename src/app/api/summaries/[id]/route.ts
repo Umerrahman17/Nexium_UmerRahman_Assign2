@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import DatabaseService from '@/lib/database';
 
+// ✅ GET /api/summaries/[id]
 export async function GET(
   request: NextRequest,
   context: { params: { id: string } }
 ) {
   try {
-    const { params } = context;
-    if (!params?.id) {
+    const { id } = context.params;
+
+    if (!id) {
       return new NextResponse('Missing ID', { status: 400 });
     }
 
-    const summary = await DatabaseService.getSummaryById(params.id);
+    const summary = await DatabaseService.getSummaryById(id);
 
     if (!summary) {
       return new NextResponse('Not found', { status: 404 });
@@ -24,9 +26,13 @@ export async function GET(
   }
 }
 
-export async function PUT(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+// ✅ PUT /api/summaries/[id]
+export async function PUT(
+  request: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const { id } = await context.params;
+    const { id } = context.params;
     const updateData = await request.json();
 
     if (!id) {
@@ -37,10 +43,10 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
     }
 
     const updatedSummary = await DatabaseService.updateSummary(id, updateData);
-    
+
     return NextResponse.json(updatedSummary);
   } catch (error) {
-    console.error('Error updating summary:', error);
+    console.error('❌ Error updating summary:', error);
     return NextResponse.json(
       { error: 'Failed to update summary' },
       { status: 500 }
@@ -48,9 +54,13 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
   }
 }
 
-export async function DELETE(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+// ✅ DELETE /api/summaries/[id]
+export async function DELETE(
+  request: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const { id } = await context.params;
+    const { id } = context.params;
 
     if (!id) {
       return NextResponse.json(
@@ -60,13 +70,13 @@ export async function DELETE(request: NextRequest, context: { params: Promise<{ 
     }
 
     await DatabaseService.deleteSummary(id);
-    
+
     return NextResponse.json({ message: 'Summary deleted successfully' });
   } catch (error) {
-    console.error('Error deleting summary:', error);
+    console.error('❌ Error deleting summary:', error);
     return NextResponse.json(
       { error: 'Failed to delete summary' },
       { status: 500 }
     );
   }
-} 
+}
