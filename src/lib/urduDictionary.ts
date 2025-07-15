@@ -2046,8 +2046,5 @@ function extractSemanticRole(words: string[]): string {
   return 'agent';
 }
 
-// function applySemanticTranslation(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
-//   // ... function body ...
-// }
 
 export default urduDictionary; 
