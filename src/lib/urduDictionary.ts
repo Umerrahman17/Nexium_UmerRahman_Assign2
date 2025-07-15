@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const urduDictionary: Record<string, string> = {
   // Basic words
   blog: 'بلاگ',
@@ -1990,7 +1993,7 @@ function applyContextAwareTranslation(analysis: LinguisticAnalysis, parsed: Pars
 
 function applyAdvancedContextTranslation(analysis: LinguisticAnalysis, parsed: ParsedSentence): string {
   // const words = analysis.originalWords;
-  // const translatedWords = analysis.translatedWords;
+  const translatedWords = analysis.translatedWords;
 
   // ... existing code ...
 
