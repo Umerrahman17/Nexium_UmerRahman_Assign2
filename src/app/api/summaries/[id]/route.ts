@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import DatabaseService from '@/lib/database';
 
-// ✅ GET /api/summaries/[id]
-export async function GET(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function GET(req: NextRequest, context: any) {
+  const id = context.params?.id;
+
+  if (!id) {
+    return new NextResponse('Missing ID', { status: 400 });
+  }
+
   try {
-    const { id } = context.params;
-
-    if (!id) {
-      return new NextResponse('Missing ID', { status: 400 });
-    }
-
     const summary = await DatabaseService.getSummaryById(id);
 
     if (!summary) {
@@ -21,62 +17,34 @@ export async function GET(
 
     return NextResponse.json(summary);
   } catch (err) {
-    console.error('❌ Error fetching summary by ID:', err);
+    console.error('❌ GET Error:', err);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
 
-// ✅ PUT /api/summaries/[id]
-export async function PUT(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function PUT(req: NextRequest, context: any) {
+  const id = context.params?.id;
+
   try {
-    const { id } = context.params;
-    const updateData = await request.json();
+    const data = await req.json();
 
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Summary ID is required' },
-        { status: 400 }
-      );
-    }
-
-    const updatedSummary = await DatabaseService.updateSummary(id, updateData);
+    const updatedSummary = await DatabaseService.updateSummary(id, data);
 
     return NextResponse.json(updatedSummary);
-  } catch (error) {
-    console.error('❌ Error updating summary:', error);
-    return NextResponse.json(
-      { error: 'Failed to update summary' },
-      { status: 500 }
-    );
+  } catch (err) {
+    console.error('❌ PUT Error:', err);
+    return new NextResponse('Failed to update summary', { status: 500 });
   }
 }
 
-// ✅ DELETE /api/summaries/[id]
-export async function DELETE(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest, context: any) {
+  const id = context.params?.id;
+
   try {
-    const { id } = context.params;
-
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Summary ID is required' },
-        { status: 400 }
-      );
-    }
-
     await DatabaseService.deleteSummary(id);
-
     return NextResponse.json({ message: 'Summary deleted successfully' });
-  } catch (error) {
-    console.error('❌ Error deleting summary:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete summary' },
-      { status: 500 }
-    );
+  } catch (err) {
+    console.error('❌ DELETE Error:', err);
+    return new NextResponse('Failed to delete summary', { status: 500 });
   }
 }
