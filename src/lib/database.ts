@@ -1,7 +1,9 @@
 import { connectToMongo } from './mongodb';
 import BlogContent from './models/BlogContent';
 import { IBlogContent } from './models/BlogContent';
-import { prisma } from './prisma';
+import { getPrisma } from './prisma';
+const prisma = getPrisma();
+
 
 export interface BlogData {
   originalUrl: string;

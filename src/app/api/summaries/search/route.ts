@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma'; // ✅ use safe lazy-loaded prisma
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,6 +20,8 @@ export async function GET(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const prisma = getPrisma(); // ✅ safe call inside the function
 
     const summaries = await prisma.blogSummary.findMany({
       where: {
@@ -43,4 +45,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

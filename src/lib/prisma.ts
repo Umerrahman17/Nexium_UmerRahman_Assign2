@@ -1,20 +1,15 @@
+// src/lib/prisma.ts
+
 import { PrismaClient } from '@prisma/client';
+import dotenv from 'dotenv';
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+dotenv.config();
 
-// Check if DATABASE_URL is available
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set. Please check your .env file.');
+let prisma: PrismaClient;
+
+export function getPrisma() {
+  if (!prisma) {
+    prisma = new PrismaClient();
+  }
+  return prisma;
 }
-
-export const prisma = globalForPrisma.prisma ?? new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma; 

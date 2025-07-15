@@ -1,10 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  // ... your other config options ...
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+    MONGODB_URI: process.env.MONGODB_URI,
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
