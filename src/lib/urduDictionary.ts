@@ -341,8 +341,6 @@ const urduDictionary: Record<string, string> = {
   often: 'اکثر',
   sometimes: 'کبھی کبھی',
   rarely: 'شاذ و نادر',
-  never: 'کبھی نہیں',
-  always: 'ہمیشہ',
   frequently: 'بار بار',
   occasionally: 'کبھی کبھار',
   
@@ -401,7 +399,6 @@ const urduDictionary: Record<string, string> = {
   some: 'کچھ',
   all: 'سب',
   none: 'کوئی نہیں',
-  each: 'ہر ایک',
   every: 'ہر',
   any: 'کوئی',
   several: 'کئی',
@@ -430,7 +427,6 @@ const urduDictionary: Record<string, string> = {
   to: 'کے لیے',
   courses: 'کورسز',
   available: 'دستیاب',
-  online: 'آن لائن',
   learn: 'سیکھنا',
   code: 'کوڈ',
   listed: 'فہرست دی',
@@ -485,7 +481,6 @@ const urduDictionary: Record<string, string> = {
   meeting: 'اجلاس',
   calendar: 'کیلنڈر',
   notes: 'نوٹس',
-  document: 'دستاویز',
   reporting: 'رپورٹنگ',
 
   // Emotions & Reactions
@@ -655,7 +650,6 @@ const urduDictionary: Record<string, string> = {
   bedroom: 'بیڈروم',
   bathroom: 'غسل خانہ',
   livingroom: 'ڈرائنگ روم',
-  window: 'کھڑکی',
   door: 'دروازہ',
   table: 'میز',
   chair: 'کرسی',
@@ -771,7 +765,6 @@ const urduDictionary: Record<string, string> = {
   // Artificial Intelligence & Machine Learning
   ai: 'مصنوعی ذہانت',
   ml: 'مشین لرننگ',
-  model: 'ماڈل',
   dataset: 'ڈیٹا سیٹ',
   algorithm: 'الگورتھم',
   training: 'ٹریننگ',
@@ -780,7 +773,6 @@ const urduDictionary: Record<string, string> = {
   neural: 'نیورل',
   supervised: 'نگرانی شدہ',
   unsupervised: 'بغیر نگرانی کے',
-  learning: 'سیکھنا',
   classification: 'درجہ بندی',
   clustering: 'گروہ بندی',
 
@@ -797,7 +789,6 @@ const urduDictionary: Record<string, string> = {
   kind: 'مہربان',
 
   // Miscellaneous Useful Words
-  important: 'اہم',
   complete: 'مکمل',
   empty: 'خالی',
   full: 'بھرا ہوا',
@@ -831,7 +822,6 @@ const urduDictionary: Record<string, string> = {
   flight: 'پرواز',
   train: 'ٹرین',
   bus: 'بس',
-  stop: 'اسٹاپ',
   reservation: 'بکنگ',
   luggage: 'سامان',
   guide: 'رہنما',
@@ -858,15 +848,10 @@ const urduDictionary: Record<string, string> = {
   school: 'اسکول',
   college: 'کالج',
   university: 'یونیورسٹی',
-  class: 'کلاس',
   classroom: 'کلاس روم',
-  teacher: 'استاد',
-  student: 'طالب علم',
-  subject: 'مضمون',
   assignment: 'اسائنمنٹ',
   exam: 'امتحان',
   grade: 'درجہ',
-  result: 'نتیجہ',
   homework: 'ہوم ورک',
   attendance: 'حاضری',
   lecture: 'لیکچر',
@@ -882,7 +867,6 @@ const urduDictionary: Record<string, string> = {
   experience: 'تجربہ',
   skill: 'مہارت',
   hiring: 'بھرتی',
-  company: 'کمپنی',
   employer: 'آجر',
   salary: 'تنخواہ',
   promotion: 'ترقی',
@@ -930,8 +914,6 @@ const urduDictionary: Record<string, string> = {
   loop: 'چکر',
   array: 'ارے',
   object: 'آبجیکٹ',
-  method: 'طریقہ',
-  function: 'فنکشن',
   parameter: 'پیرامیٹر',
   variable: 'متغیر',
   constant: 'مستقل',
@@ -946,7 +928,6 @@ const urduDictionary: Record<string, string> = {
 
   // Database Terms
   database: 'ڈیٹا بیس',
-  table: 'جدول',
   column: 'کالم',
   row: 'قطار',
   record: 'ریکارڈ',
@@ -954,9 +935,7 @@ const urduDictionary: Record<string, string> = {
   query: 'استفسار',
   select: 'منتخب کریں',
   insert: 'درج کریں',
-  primary: 'پرائمری',
   foreign: 'غیر ملکی',
-  key: 'چابی',
   index: 'اشاریہ',
   join: 'جوڑنا',
   relation: 'رشتہ',
@@ -988,60 +967,27 @@ const urduDictionary: Record<string, string> = {
   // Daily Activities & Routine
   workout: 'ورزش',
   drive: 'ڈرائیو کرنا',
-  call: 'کال',
 
   // Communication & Media
   watch: 'دیکھنا',
-  news: 'خبریں',
-  channel: 'چینل',
   radio: 'ریڈیو',
-  television: 'ٹی وی',
   newspaper: 'اخبار',
   announcement: 'اعلان',
-  interview: 'انٹرویو',
 
   // Travel & Places
-  travel: 'سفر',
-  trip: 'دورہ',
-  tour: 'سیاحت',
   vacation: 'تعطیلات',
-  destination: 'منزل',
-  location: 'مقام',
-  place: 'جگہ',
-  airport: 'ائیرپورٹ',
-  station: 'اسٹیشن',
-  hotel: 'ہوٹل',
-  ticket: 'ٹکٹ',
-  passport: 'پاسپورٹ',
-  visa: 'ویزا',
-  luggage: 'سامان',
 
   // Clothing & Fashion
-  shirt: 'قمیض',
   pants: 'پتلون',
-  shoes: 'جوتے',
-  socks: 'موزے',
-  dress: 'لباس',
   scarf: 'دوپٹہ',
-  jacket: 'جیکٹ',
   cap: 'ٹوپی',
-  jeans: 'جینز',
   fashion: 'فیشن',
-  style: 'انداز',
   wear: 'پہننا',
 
   // Weather & Nature
-  sun: 'سورج',
   moon: 'چاند',
   stars: 'ستارے',
   sky: 'آسمان',
-  rain: 'بارش',
-  snow: 'برف',
-  wind: 'ہوا',
-  storm: 'طوفان',
-  cold: 'سردی',
-  hot: 'گرمی',
-  cloud: 'بادل',
   tree: 'درخت',
   flower: 'پھول',
   grass: 'گھاس',
@@ -1049,32 +995,19 @@ const urduDictionary: Record<string, string> = {
   river: 'دریا',
 
   // School & Exams
-  school: 'سکول',
-  college: 'کالج',
-  university: 'یونیورسٹی',
-  class: 'کلاس',
-  lecture: 'لیکچر',
-  exam: 'امتحان',
   test: 'ٹیسٹ',
-  grade: 'درجہ',
   marks: 'نمبرات',
-  assignment: 'اسائنمنٹ',
-  homework: 'ہوم ورک',
 
   // Web & Learning Context
   feature: 'خصوصیت',
   features: 'خصوصیات',
-  guide: 'رہنما',
   step: 'مرحلہ',
   steps: 'مراحل',
   instructions: 'ہدایات',
-  version: 'ورژن',
   release: 'اجرا',
 
   // Education & E-Learning
   course: 'کورس',
-  lesson: 'سبق',
-  module: 'ماڈیول',
   quiz: 'کوئز',
   certificate: 'سرٹیفکیٹ',
   enroll: 'داخلہ لینا',
@@ -1090,7 +1023,6 @@ const urduDictionary: Record<string, string> = {
   contribution: 'شراکت',
 
   // Account & Access
-  account: 'اکاؤنٹ',
   setting: 'ترتیب',
   signup: 'سائن اپ',
   security: 'سیکیورٹی',
@@ -1104,7 +1036,6 @@ const urduDictionary: Record<string, string> = {
   sort: 'ترتیب دینا',
   next: 'اگلا',
   previous: 'پچھلا',
-  continue: 'جاری رکھنا',
 
   // Data Structures & Technical Terms
   'data structure': 'ڈیٹا اسٹرکچر',
@@ -1114,7 +1045,6 @@ const urduDictionary: Record<string, string> = {
   organized: 'منظم',
   stored: 'محفوظ',
   manipulated: 'تبدیل',
-  program: 'پروگرام',
   understanding: 'سمجھنا',
   efficient: 'موثر',
   effective: 'کارگر',
@@ -1132,27 +1062,18 @@ const urduDictionary: Record<string, string> = {
   fixed: 'مقرر',
   size: 'سائز',
   randomly: 'بے ترتیب',
-  runtime: 'رن ٹائم',
   'space complexity': 'اسپیس کمپلیکسٹی',
-  code: 'کوڈ',
 
   // Web/Programming/Technical Terms for improved translation
   chapter: 'باب',
-  introduction: 'تعارف',
   discuss: 'بحث',
-  concepts: 'تصورات',
-  background: 'پس منظر',
   general: 'عمومی',
-  understanding: 'سمجھنا',
-  internet: 'انٹرنیٹ',
   'world wide web': 'ورلڈ وائڈ ویب',
   www: 'ڈبلیو ڈبلیو ڈبلیو',
   'working knowledge': 'عملی علم',
   'hypertext markup language': 'ہائپر ٹیکسٹ مارک اپ لینگویج',
-  html: 'ایچ ٹی ایم ایل',
   documentation: 'دستاویزات',
   mdn: 'ایم ڈی این',
-  dynamic: 'متحرک',
   scripting: 'سکرپٹنگ',
   structured: 'ساختہ',
   guides: 'رہنما',
@@ -1164,17 +1085,11 @@ const urduDictionary: Record<string, string> = {
   'host environment': 'میزبان ماحول',
   browser: 'براؤزر',
   connected: 'منسلک',
-  objects: 'آبجیکٹس',
-  environment: 'ماحول',
   programmatic: 'پروگراماتی',
-  control: 'کنٹرول',
   'client-side': 'کلائنٹ سائیڈ',
   extensions: 'ایکسٹینشنز',
-  application: 'ایپلیکیشن',
   communicate: 'رابطہ',
-  database: 'ڈیٹا بیس',
   continuity: 'تسلسل',
-  information: 'معلومات',
   invocation: 'کال',
   perform: 'انجام دینا',
   'file manipulations': 'فائل ہیرا پھیری',
@@ -1184,14 +1099,12 @@ const urduDictionary: Record<string, string> = {
   'ecma international': 'ای سی ایم اے انٹرنیشنل',
   'european association': 'یورپی ایسوسی ایشن',
   standardizing: 'معیاری بنانا',
-  communication: 'ابلاغ',
   systems: 'سسٹمز',
   'computer manufacturers': 'کمپیوٹر مینوفیکچررز',
   deliver: 'فراہم کرنا',
   'document object model': 'ڈاکیومنٹ آبجیکٹ ماڈل',
   dom: 'ڈی او ایم',
   consortium: 'کونسورٹیم',
-  w3c: 'ڈبلیو تھری سی',
   whatwg: 'واٹ ڈبلیو جی',
   'web hypertext application technology working group': 'ویب ہائپر ٹیکسٹ ایپلیکیشن ٹیکنالوجی ورکنگ گروپ',
 
@@ -1202,7 +1115,6 @@ const urduDictionary: Record<string, string> = {
   teaching: 'پڑھانا',
   react: 'ری ایکٹ',
   local: 'مقامی',
-  coding: 'کوڈنگ',
   bootcamp: 'بوٹ کیمپ',
   noticed: 'نوٹ کیا',
   handful: 'چند',
@@ -1212,10 +1124,7 @@ const urduDictionary: Record<string, string> = {
   'off guard': 'غافل',
   steer: 'رہنمائی',
   avoid: 'اجتناب',
-  frustration: 'مایوسی',
   order: 'ترتیب',
-  blog: 'بلاگ',
-  light: 'ہلکا',
   breezy: 'خوشگوار',
   dig: 'کھودنا',
   reasons: 'وجوہات',
@@ -1224,29 +1133,20 @@ const urduDictionary: Record<string, string> = {
   audience: 'سامعین',
   written: 'تحریر',
   developers: 'ڈویلپرز',
-  familiar: 'واقف',
   basics: 'بنیادیات',
-  journey: 'سفر',
-  link: 'لنک',
   evaluating: 'جانچنا',
-  zero: 'صفر',
   alright: 'ٹھیک ہے',
-  start: 'شروع',
   pervasive: 'وسیع',
   usestate: 'یوز اسٹیٹ',
   null: 'خالی',
   async: 'ایسنک',
-  function: 'فنکشن',
   retrieve: 'حاصل کرنا',
-  data: 'ڈیٹا',
   res: 'ریسپانس',
   await: 'انتظار',
   fetch: 'حاصل کرنا',
   API: 'اے پی آئی',
   json: 'جیسن',
   randomuuid: 'رینڈم یو یو آئی ڈی',
-  update: 'اپ ڈیٹ',
-  state: 'حالت',
   augmented: 'اضافہ شدہ',
   setdata: 'سیٹ ڈیٹا',
   missing: 'غائب',
@@ -1254,13 +1154,10 @@ const urduDictionary: Record<string, string> = {
   dastardly: 'مکار',
   see: 'دیکھنا',
   time: 'وقت',
-  web: 'ویب',
   log: 'لاگ',
-  continue: 'جاری رکھنا',
   export: 'ایکسپورٹ',
   default: 'ڈیفالٹ',
   app: 'ایپ',
-  result: 'نتیجہ',
   console: 'کنسول',
   refresh: 'تازہ کاری',
   results: 'نتائج',
@@ -1268,7 +1165,6 @@ const urduDictionary: Record<string, string> = {
   notice: 'نوٹس',
   sentences: 'جملے',
   smushed: 'دبے ہوئے',
-  together: 'اکٹھے',
   happens: 'ہوتا ہے',
   jsx: 'جے ایس ایکس',
   compiler: 'کمپائلر',
@@ -1284,59 +1180,41 @@ const urduDictionary: Record<string, string> = {
   works: 'کام کرتا ہے',
   expect: 'توقع',
   delegated: 'تفویض',
-  return: 'واپسی',
   label: 'لیبل',
   symbolism: 'علامت',
   chose: 'منتخب کیا',
   use: 'استعمال',
-  empty: 'خالی',
-  html: 'ایچ ٹی ایم ایل',
   tag: 'ٹیگ',
   fragments: 'ٹکڑے',
   produce: 'پیدا کرنا',
   real: 'حقیقی',
   markup: 'مارک اپ',
   // API, HTTP, and Web Programming Terms for improved translation
-  fetch: 'فیچ',
   'api interface': 'اے پی آئی انٹرفیس',
   'http requests': 'ایچ ٹی ٹی پی درخواستیں',
-  processing: 'پروسیسنگ',
   responses: 'جوابات',
   'modern replacement': 'جدید متبادل',
   xmlhttprequest: 'ایکس ایم ایل ایچ ٹی ٹی پی ریکویسٹ',
   callbacks: 'کال بیکس',
   'promise-based': 'پرومس پر مبنی',
   integrated: 'ضم شدہ',
-  features: 'خصوصیات',
   'modern web': 'جدید ویب',
   'service workers': 'سروس ورکرز',
   'cross-origin resource sharing': 'کراس اوریجن ریسورس شیئرنگ',
   cors: 'سی او آر ایس',
   request: 'درخواست',
   calling: 'کال کرنا',
-  available: 'دستیاب',
   'global function': 'عالمی فنکشن',
-  window: 'ونڈو',
-  worker: 'ورکر',
   contexts: 'سیاق و سباق',
-  example: 'مثال',
-  use: 'استعمال',
   'url params': 'یو آر ایل پیرا میٹرز',
-  object: 'آبجیکٹ',
   encode: 'انکوڈ',
   'form data': 'فارم ڈیٹا',
-  information: 'معلومات',
   js: 'جے ایس',
-  response: 'جواب',
   wait: 'انتظار',
-  method: 'طریقہ',
-  post: 'پوسٹ',
   'content-type': 'مواد کی قسم',
-  application: 'ایپلیکیشن',
   'www-form-urlencoded': 'ڈبلیو ڈبلیو ڈبلیو-فارم-یورینکوڈڈ',
   automatically: 'خود بخود',
   converted: 'تبدیل',
-  username: 'یوزر نیم',
   password: 'پاس ورڈ',
   body: 'باڈی',
   note: 'نوٹ',
@@ -1347,57 +1225,33 @@ const urduDictionary: Record<string, string> = {
   included: 'شامل',
   twice: 'دو بار',
   give: 'دینا',
-  about: 'کے بارے میں',
-  write: 'لکھنا',
   tells: 'بتاتا ہے',
   format: 'فارمیٹ',
   append: 'ایپینڈ',
-  json: 'جیسن',
-  most: 'زیادہ تر',
-  time: 'وقت',
-  website: 'ویب سائٹ',
-  should: 'چاہیے',
   not: 'نہیں',
-  main: 'مرکزی',
-  application: 'ایپلیکیشن',
   certain: 'کچھ',
   'use cases': 'استعمال کے کیسز',
   stringify: 'سٹرنگیفائی',
   create: 'بنائیں',
   another: 'دوسرا',
-  while: 'جبکہ',
   changing: 'تبدیل کرنا',
-  some: 'کچھ',
   its: 'اس کا',
-  using: 'استعمال کرتے ہوئے',
-  second: 'دوسرا',
-  argument: 'آرگومنٹ',
-  async: 'ایسنک',
-  post: 'پوسٹ',
   try: 'کوشش',
-  result: 'نتیجہ',
   // CSS, Flexbox, and Layout Terms for improved translation
   truly: 'واقعی',
-  understand: 'سمجھنا',
   how: 'کیسے',
-  works: 'کام کرتا ہے',
-  build: 'بنائیں',
-  dynamic: 'متحرک',
   layouts: 'لے آؤٹس',
   respond: 'ردعمل',
-  automatically: 'خود بخود',
   rearranging: 'دوبارہ ترتیب دینا',
   needed: 'ضرورت',
   container: 'کنٹینر',
   width: 'چوڑائی',
   drag: 'ڈریگ',
   name: 'نام',
-  email: 'ای میل',
   submit: 'جمع کروائیں',
   demo: 'ڈیمو',
   inspired: 'متاثر',
   incredible: 'ناقابل یقین',
-  price: 'قیمت',
   codepen: 'کوڈ پین',
   relevant: 'متعلقہ',
   css: 'سی ایس ایس',
@@ -1411,15 +1265,12 @@ const urduDictionary: Record<string, string> = {
   'flex-wrap': 'فلیکس ریپ',
   wrap: 'ریپ',
   gap: 'وقفہ',
-  default: 'ڈیفالٹ',
   flow: 'بہاؤ',
   meant: 'مراد',
   digital: 'ڈیجیٹل',
   documents: 'دستاویزات',
   essentially: 'بنیادی طور پر',
   'microsoft word': 'مائیکروسافٹ ورڈ',
-  algorithm: 'الگورتھم',
-  link: 'لنک',
   alignment: 'صف بندی',
   change: 'تبدیل',
   children: 'بچے',
@@ -1428,14 +1279,9 @@ const urduDictionary: Record<string, string> = {
   'justify-content': 'جسٹیفائی-کنٹینٹ',
   property: 'خصوصیت',
   hello: 'ہیلو',
-  to: 'کو',
-  the: 'یہ',
   world: 'دنیا',
   'flex-direction': 'فلیکس-ڈائریکشن',
-  row: 'قطار',
-  column: 'کالم',
   center: 'مرکز',
-  'flex-end': 'فلیکس اینڈ',
   'space-between': 'اسپیس-بیٹوین',
   'space-around': 'اسپیس-اراؤنڈ',
   'space-evenly': 'اسپیس-ایونلی',
@@ -1446,7 +1292,6 @@ const urduDictionary: Record<string, string> = {
   child: 'بچہ',
   stretch: 'اسٹریچ',
   baseline: 'بیس لائن',
-  interesting: 'دلچسپ',
   growing: 'بڑھنا',
   shrinking: 'سکڑنا',
   seen: 'دیکھا',
@@ -1459,11 +1304,6 @@ const urduDictionary: Record<string, string> = {
   horizontally: 'افقی طور پر',
   vertically: 'عمودی طور پر',
   teach: 'سکھانا',
-  concept: 'تصور',
-  course: 'کورس',
-  every: 'ہر',
-  now: 'اب',
-  then: 'پھر',
   someone: 'کوئی',
   wonder: 'حیرت',
   going: 'جا رہا',
@@ -1471,8 +1311,6 @@ const urduDictionary: Record<string, string> = {
   trouble: 'پریشانی',
   'flex-shrink': 'فلیکس-شرنک',
   simpler: 'آسان',
-  approach: 'انداز',
-  available: 'دستیاب',
 };
 
 export function translateToUrdu(text: string): string {
@@ -1493,8 +1331,8 @@ export function translateToUrdu(text: string): string {
     'No content available to summarize.': 'خلاصہ بنانے کے لیے کوئی مواد دستیاب نہیں ہے۔'
   };
 
-  if (simpleErrorMessages[text]) {
-    return simpleErrorMessages[text];
+  if (text in simpleErrorMessages) {
+    return simpleErrorMessages[text as keyof typeof simpleErrorMessages];
   }
 
   // Pre-process text for better translation
@@ -1532,7 +1370,7 @@ function translateSentenceWithImprovedGrammar(sentence: string): string {
   const words = lowerSentence.split(/\s+/);
   
   // Step 1: Direct word translation with fallback
-  let translatedWords = words.map(word => {
+  const translatedWords = words.map(word => {
     // Try to find translation in dictionary
     if (urduDictionary[word]) {
       return urduDictionary[word];
@@ -2364,7 +2202,7 @@ function addContextAwareVerb(result: string, analysis: LinguisticAnalysis): stri
   }
 }
 
-function analyzeSemanticStructure(sentence: string): any {
+function analyzeSemanticStructure(sentence: string): unknown {
   // Analyze semantic meaning for better translation
   const words = sentence.toLowerCase().split(/\s+/);
   
@@ -2410,41 +2248,41 @@ function extractSemanticRole(words: string[]): string {
   return 'agent';
 }
 
-function applySemanticTranslation(analysis: LinguisticAnalysis, semanticAnalysis: any): string {
+function applySemanticTranslation(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
   const words = analysis.originalWords;
   const translatedWords = analysis.translatedWords;
 
   // Apply semantic-aware translation based on context
   
   // 1. Topic-comment structure
-  if (semanticAnalysis.topic) {
+  if ((semanticAnalysis as any).topic) {
     return applyTopicCommentStructure(analysis, semanticAnalysis);
   }
 
   // 2. Emphasis handling
-  if (semanticAnalysis.emphasis.length > 0) {
+  if ((semanticAnalysis as any).emphasis && (semanticAnalysis as any).emphasis.length > 0) {
     return applyEmphasisStructure(analysis, semanticAnalysis);
   }
 
   // 3. Discourse marker handling
-  if (semanticAnalysis.discourseMarkers.length > 0) {
+  if ((semanticAnalysis as any).discourseMarkers && (semanticAnalysis as any).discourseMarkers.length > 0) {
     return applyDiscourseMarkerStructure(analysis, semanticAnalysis);
   }
 
   // 4. Semantic role handling
-  if (semanticAnalysis.semanticRole !== 'agent') {
+  if ((semanticAnalysis as any).semanticRole !== 'agent') {
     return applySemanticRoleStructure(analysis, semanticAnalysis);
   }
 
   return applyDefaultTranslation(analysis);
 }
 
-function applyTopicCommentStructure(analysis: LinguisticAnalysis, semanticAnalysis: any): string {
+function applyTopicCommentStructure(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
   const words = analysis.originalWords;
   const translatedWords = analysis.translatedWords;
 
   // Apply topic-comment structure common in Urdu
-  const topic = semanticAnalysis.topic;
+  const topic = (semanticAnalysis as any).topic;
   const topicIndex = words.indexOf(topic);
   
   if (topicIndex !== -1) {
@@ -2463,12 +2301,12 @@ function applyTopicCommentStructure(analysis: LinguisticAnalysis, semanticAnalys
   return translatedWords.join(' ') + ' ہے';
 }
 
-function applyEmphasisStructure(analysis: LinguisticAnalysis, semanticAnalysis: any): string {
+function applyEmphasisStructure(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
   const words = analysis.originalWords;
   const translatedWords = analysis.translatedWords;
 
   // Handle emphasis markers properly
-  const emphasis = semanticAnalysis.emphasis[0];
+  const emphasis = (semanticAnalysis as any).emphasis[0];
   const emphasisIndex = words.indexOf(emphasis);
   
   if (emphasisIndex !== -1) {
@@ -2494,12 +2332,12 @@ function applyEmphasisStructure(analysis: LinguisticAnalysis, semanticAnalysis: 
   return translatedWords.join(' ') + ' ہے';
 }
 
-function applyDiscourseMarkerStructure(analysis: LinguisticAnalysis, semanticAnalysis: any): string {
+function applyDiscourseMarkerStructure(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
   const words = analysis.originalWords;
   const translatedWords = analysis.translatedWords;
 
   // Handle discourse markers for better flow
-  const marker = semanticAnalysis.discourseMarkers[0];
+  const marker = (semanticAnalysis as any).discourseMarkers[0];
   const markerIndex = words.indexOf(marker);
   
   if (markerIndex !== -1) {
@@ -2529,12 +2367,12 @@ function applyDiscourseMarkerStructure(analysis: LinguisticAnalysis, semanticAna
   return translatedWords.join(' ') + ' ہے';
 }
 
-function applySemanticRoleStructure(analysis: LinguisticAnalysis, semanticAnalysis: any): string {
+function applySemanticRoleStructure(analysis: LinguisticAnalysis, semanticAnalysis: unknown): string {
   const words = analysis.originalWords;
   const translatedWords = analysis.translatedWords;
 
   // Handle different semantic roles
-  switch (semanticAnalysis.semanticRole) {
+  switch ((semanticAnalysis as any).semanticRole) {
     case 'passive':
       return handlePassiveVoice(analysis);
     case 'purpose':
